@@ -134,7 +134,7 @@ def catpi_finder(path, residues=['LYS', 'ARG', 'PHE', 'TRP', 'TYR'],
     parsed = parse_residues(path, residues = residues, exclude_backbone = exclude_backbone, exclude_atoms = exclude_atoms)
     
     # get the distance
-    distances = get_distances(parsed, distance_cutoff = mean_threshold * 1.4)
+    distances = get_distances(parsed_structure, bait_atoms, prey_atoms, distance_cutoff = mean_threshold * 1.4)
     
     # filter the distances according the input variables
     if chains is not None:
