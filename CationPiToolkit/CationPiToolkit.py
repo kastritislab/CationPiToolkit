@@ -98,12 +98,12 @@ def get_distances(parsed_structure, bait_atoms, prey_atoms, distance_cutoff):
         # order them
         order = ['cation_atom', 'cation_resn', 'cation_resi', 'cation_chain', 'pi_atom', 'pi_resn', 'pi_resi',
                  'pi_chain', 'dists', ]
-        print(hits)
         measured_distances.append(hits[order])
 
-    print(measured_distances)
-
-    return pd.concat(measured_distances)
+    if measured_distances:
+        return pd.concat(measured_distances)
+    else:
+        return False
 
 def catpi_finder(path, residues=['LYS', 'ARG', 'PHE', 'TRP', 'TYR'], 
                  exclude_backbone=True, exclude_atoms=["CB", "NH1", "NH2", "NE1", "NE2", "OH"], 
@@ -137,6 +137,11 @@ def catpi_finder(path, residues=['LYS', 'ARG', 'PHE', 'TRP', 'TYR'],
     
     # get the distance
     distances = get_distances(parsed_structure, bait_atoms, prey_atoms, distance_cutoff = mean_threshold * 1.4)
+    
+    if distances is False:
+        print("No interaction found")
+        return None
+    
     
     # filter the distances according the input variables
     if chains is not None:
