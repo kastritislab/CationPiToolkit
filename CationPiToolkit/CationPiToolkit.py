@@ -170,11 +170,11 @@ def main():
     parser.add_argument('--residues', nargs='+', default=['LYS', 'ARG', 'PHE', 'TRP', 'TYR'], help='List of residues to consider for interactions.')
     parser.add_argument('--exclude_backbone', action='store_true', help='If set, exclude backbone atoms.')
     parser.add_argument('--exclude_atoms', nargs='+', default=["CB", "NH1", "NH2", "NE1", "NE2", "OH"], help='List of atoms to exclude from the results.')
-    parser.add_argument('--chains', nargs='*', default=None, help='List of chains to consider for interactions.')
+    parser.add_argument('--chains',nargs='+', default=None, help='List of chains to consider for interactions.')
     parser.add_argument('--min_interactions', type=int, default=6, help='Minimum number of interactions for consideration.')
     parser.add_argument('--mean_threshold', type=float, default=5, help='Mean distance threshold.')
     parser.add_argument('--std_threshold', type=float, default=0.75, help='Standard deviation threshold.')
-    parser.add_argument('--bait_atoms', nargs='+', default=[('ARG', 'CZ'), ('LYS', 'NZ')], help='List of bait atoms for the interactions. Each bait atom is represented as a tuple of residue name and atom name.')
+    parser.add_argument('--bait_atoms', nargs='+', default=[('ARG', 'CZ'), ('LYS', 'NZ')], help='List of bait atoms for the interactions. Each bait atom is represented as "resn atom".')
     parser.add_argument('--prey_atoms', nargs='+', default=[('TRP', ['CD2', 'CE2', 'CE3', 'CZ2', 'CZ3', 'CH2']),
                                                             ('PHE', ['CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ']),
                                                             ('TYR', ['CG', 'CD1', 'CD2', 'CE1', 'CE2', 'CZ'])], 
@@ -182,6 +182,20 @@ def main():
 
     # Parse the arguments
     args = parser.parse_args()
+
+    # Use the arguments in the default_workflow function
+    interactions = catpi_finder(
+        args.path, 
+        residues=args.residues,
+        exclude_backbone=args.exclude_backbone,
+        exclude_atoms=args.exclude_atoms,
+        bait_atoms=[tuple(i.split()) for i in args.bait_atoms.split(",")],
+        prey_atoms=[[i.split()[0], tuple(i.split()[1:])] for i in args.prey_atoms.split(",")]
+        chains=args.chains,
+        min_interactions=args.min_interactions,
+        mean_threshold=args.mean_threshold,
+        std_threshold=args.std_threshold
+    )
 
     print(args)
     return
