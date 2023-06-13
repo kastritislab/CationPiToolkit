@@ -131,7 +131,7 @@ def catpi_finder(path, residues=['LYS', 'ARG', 'PHE', 'TRP', 'TYR'],
 
     
     # parse the pdb structure
-    parsed = parse_residues(path, residues = residues, exclude_backbone = exclude_backbone, exclude_atoms = exclude_atoms)
+    parsed_structure = parse_residues(path, residues = residues, exclude_backbone = exclude_backbone, exclude_atoms = exclude_atoms)
     
     # get the distance
     distances = get_distances(parsed_structure, bait_atoms, prey_atoms, distance_cutoff = mean_threshold * 1.4)
@@ -159,7 +159,7 @@ def catpi_finder(path, residues=['LYS', 'ARG', 'PHE', 'TRP', 'TYR'],
     ofile = path[:-4] + "_catpi.csv"
     selected_distances.to_csv(ofile, index = False)
     
-    return selected_distances.sort_values(by = "cation_chain")
+    return selected_distances
 
 def main():
     # Create an ArgumentParser object
