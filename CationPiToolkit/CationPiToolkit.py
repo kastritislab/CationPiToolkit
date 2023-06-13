@@ -98,8 +98,10 @@ def get_distances(parsed_structure, bait_atoms, prey_atoms, distance_cutoff):
         # order them
         order = ['cation_atom', 'cation_resn', 'cation_resi', 'cation_chain', 'pi_atom', 'pi_resn', 'pi_resi',
                  'pi_chain', 'dists', ]
-
+        print(hits)
         measured_distances.append(hits[order])
+
+    print(measured_distances)
 
     return pd.concat(measured_distances)
 
@@ -194,8 +196,6 @@ def main():
     else:
         prey_atoms=args.prey_atoms
     
-    print(args)
-    return
     
     # Use the arguments in the default_workflow function
     interactions = catpi_finder(
@@ -213,19 +213,6 @@ def main():
 
 
 
-    # Use the arguments in the default_workflow function
-    interactions = catpi_finder(
-        args.path, 
-        residues=args.residues,
-        exclude_backbone=args.exclude_backbone,
-        exclude_atoms=args.exclude_atoms,
-        bait_atoms=args.bait_atoms,
-        prey_atoms=args.prey_atoms,
-        chains=args.chains,
-        min_interactions=args.min_interactions,
-        mean_threshold=args.mean_threshold,
-        std_threshold=args.std_threshold
-    )
 
     
 
