@@ -183,14 +183,25 @@ def main():
     # Parse the arguments
     args = parser.parse_args()
 
+    # parse the input
+    if isinstance(args.bait_atoms, str):
+        bait_atoms=[tuple(i.split()) for i in args.bait_atoms.split(",")]
+    else:
+        bait_atoms=args.bait_atoms
+
+    if isinstance(args.prey_atoms, str):
+        prey_atoms=[tuple(i.split()[0], i.split()[1:]) for i in args.prey_atoms.split(",")]
+    else:
+        prey_atoms=args.prey_atoms
+
     # Use the arguments in the default_workflow function
     interactions = catpi_finder(
         args.path, 
         residues=args.residues,
         exclude_backbone=args.exclude_backbone,
         exclude_atoms=args.exclude_atoms,
-        bait_atoms=[tuple(i.split()) for i in args.bait_atoms.split(",")],
-        prey_atoms=[tuple(i.split()[0], i.split()[1:]) for i in args.prey_atoms.split(",")],
+        bait_atoms=bait_atoms,
+        prey_atoms=prey_atoms,
         chains=args.chains,
         min_interactions=args.min_interactions,
         mean_threshold=args.mean_threshold,
