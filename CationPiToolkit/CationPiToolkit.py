@@ -190,7 +190,7 @@ def main():
         exclude_backbone=args.exclude_backbone,
         exclude_atoms=args.exclude_atoms,
         bait_atoms=[tuple(i.split()) for i in args.bait_atoms.split(",")],
-        prey_atoms=[[i.split()[0], tuple(i.split()[1:])] for i in args.prey_atoms.split(",")]
+        prey_atoms=[tuple(i.split()[0], i.split()[1:]) for i in args.prey_atoms.split(",")],
         chains=args.chains,
         min_interactions=args.min_interactions,
         mean_threshold=args.mean_threshold,
