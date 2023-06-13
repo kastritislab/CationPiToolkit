@@ -183,6 +183,9 @@ def main():
     # Parse the arguments
     args = parser.parse_args()
 
+    print(args)
+    return
+
     # Use the arguments in the default_workflow function
     interactions = catpi_finder(
         args.path, 
