@@ -144,6 +144,10 @@ def catpi_finder(path, residues=['LYS', 'ARG', 'PHE', 'TRP', 'TYR'],
     
     
     # filter the distances according the input variables
+    
+    
+    print(chains)
+    
     if chains is not None:
         df = distances.loc[(distances.cation_chain.isin(chains)) | (distances.pi_chain.isin(chains)) ]
     else:
