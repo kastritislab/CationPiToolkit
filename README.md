@@ -65,4 +65,6 @@ The writing of this software was assited by ChatGPT.
 
 ## Citation
 
-If this software is used in your research, please cite the following paper: <to be published>
+If this software is used in your research, please cite the following paper: 
+`to be published`
+
