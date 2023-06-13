@@ -193,7 +193,10 @@ def main():
         prey_atoms=[tuple(i.split()[0], i.split()[1:]) for i in args.prey_atoms.split(",")]
     else:
         prey_atoms=args.prey_atoms
-
+    
+    print(args)
+    return
+    
     # Use the arguments in the default_workflow function
     interactions = catpi_finder(
         args.path, 
@@ -208,8 +211,7 @@ def main():
         std_threshold=args.std_threshold
     )
 
-    print(args)
-    return
+
 
     # Use the arguments in the default_workflow function
     interactions = catpi_finder(
