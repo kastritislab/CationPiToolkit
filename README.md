@@ -75,9 +75,9 @@ Optional arguments:
 These are intended as reasonable default values, but you may need to adjust them for your specific use case.
 
 
-## Acknoledgment
+## Acknowledgment
 
-The writing of this software was assited by ChatGPT.
+ChatGPT assisted in writing this software.
 
 ## Citation
 
