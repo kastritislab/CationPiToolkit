@@ -7,7 +7,7 @@ This toolkit analyses a protein structure, given as a PDB file, for potential ca
 Clone the repository using git:
 
 ```
-git clone https://github.com/ctueting/CationPiToolkit
+git clone https://github.com/kastritislab/CationPiToolkit
 ```
 
 Navigate to the downloaded folder:
